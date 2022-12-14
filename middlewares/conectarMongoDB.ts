@@ -24,9 +24,11 @@ export const conectarMongoDB =
     mongoose.connection.on("connected", () =>
       console.log("Banco de dados conectado")
     );
-    mongoose.connection.on('erro', error => console.log("ocorreu um erro no banco de dados"))
+    mongoose.connection.on('error', error => console.log(`Ocorreu erro ao conectar no banco: ${error}`))
     await mongoose.connect(DB_CONEXAO_STRING);
 
     // já que está conectado vamos seguir para o endpoint, pois estou conectado no banco
     return handler(req, res)
   };
+
+  

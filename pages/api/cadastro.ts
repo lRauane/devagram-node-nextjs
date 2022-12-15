@@ -4,11 +4,11 @@ import type { CadastroRequisicao } from "../../types/CadastroRequisicao";
 import { usuarioModel } from "../../models/usuarioModel";
 import { conectarMongoDB } from "../../middlewares/conectarMongoDB";
 import md5 from "md5";
-import { upload, uploadImagemCosmisc } from "../../services/uploadImagemCosmic";
+import { updload, uploadImagemCosmic } from "../../services/uploadImagemCosmic";
 import nc from "next-connect";
 
 const handler = nc()
-  .use(upload.single("file"))
+  .use(updload.single("file"))
   .post(
     async (req: NextApiRequest, res: NextApiResponse<RespostasPadraoMSG>) => {
       const usuario = req.body as CadastroRequisicao;
@@ -42,7 +42,7 @@ const handler = nc()
       }
 
       // enviar a imagem para o comic
-      const image = await uploadImagemCosmisc(req)
+      const image = await uploadImagemCosmic(req)
 
       //salvar no banco de dados
       const usuarioAserSalvo = {

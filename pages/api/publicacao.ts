@@ -1,14 +1,14 @@
 import type { NextApiResponse } from "next";
 import type { RespostasPadraoMSG } from "../../types/respostasPadraoMSG";
 import nc from "next-connect";
-import { upload, uploadImagemCosmisc } from "../../services/uploadImagemCosmic";
+import { updload, uploadImagemCosmic } from "../../services/uploadImagemCosmic";
 import { conectarMongoDB } from "../../middlewares/conectarMongoDB";
 import { validarTokenJWT } from "../../middlewares/validarTokenJWT";
 import {publicacaoModel} from '../../models/publicacaoModel'
 import {usuarioModel} from '../../models/usuarioModel'
 
 const handler = nc()
-  .use(upload.single("file"))
+  .use(updload.single("file"))
   .post(
     async (req: any, res: NextApiResponse<RespostasPadraoMSG>) => {
       try {
@@ -29,7 +29,7 @@ const handler = nc()
         if (!req.file || !req.file.originalname) {
           return res.status(400).json({ erro: "A imagem é obrigatória" });
         }
-        const image = await uploadImagemCosmisc(req)
+        const image = await uploadImagemCosmic(req)
         const publicacao = {
           idUsuario : usuario._id,
           descricao,

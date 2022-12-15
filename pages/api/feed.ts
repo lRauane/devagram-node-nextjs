@@ -11,6 +11,7 @@ const feedEndPoint = async (
 ) => {
   try {
     if(req.method === 'GET'){
+
       if(req?.query?.id){
         const usuario = await usuarioModel.findById(req?.query?.id)
         if(!usuario){

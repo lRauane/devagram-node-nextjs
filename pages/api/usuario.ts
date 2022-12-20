@@ -5,6 +5,7 @@ import { RespostasPadraoMSG } from "../../types/respostasPadraoMSG";
 import { usuarioModel } from "../../models/usuarioModel";
 import nc from "next-connect";
 import { updload, uploadImagemCosmic } from "../../services/uploadImagemCosmic";
+import { PoliticaCORS } from "../../middlewares/politicaCors";
 
 const handler = nc()
     .use(updload.single('file'))
@@ -59,4 +60,4 @@ export const config = {
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(handler));
+export default PoliticaCORS(validarTokenJWT(conectarMongoDB(handler)));

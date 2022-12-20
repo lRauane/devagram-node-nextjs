@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { conectarMongoDB } from "../../middlewares/conectarMongoDB";
+import { PoliticaCORS } from "../../middlewares/politicaCors";
 import { validarTokenJWT } from "../../middlewares/validarTokenJWT";
 import { usuarioModel } from "../../models/usuarioModel";
 import type { RespostasPadraoMSG } from "../../types/respostasPadraoMSG";
@@ -49,4 +50,4 @@ const pesquisaENDpoint = async (
   }
 };
 
-export default validarTokenJWT(conectarMongoDB(pesquisaENDpoint));
+export default PoliticaCORS(validarTokenJWT(conectarMongoDB(pesquisaENDpoint)));
